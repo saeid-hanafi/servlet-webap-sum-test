@@ -1,5 +1,6 @@
 package com.yasertebat.servlet;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,7 +21,10 @@ public class AddServlet extends HttpServlet {
             double newNum1 = Double.parseDouble(num1);
             double newNum2 = Double.parseDouble(num2);
             double sum = newNum1 + newNum2;
-            writer.print(sum);
+
+            req.setAttribute("SUM", sum);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("square");
+            requestDispatcher.forward(req, resp);
         }else{
             writer.print("Enter Valid Numbers, Please.");
         }
