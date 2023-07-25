@@ -13,6 +13,11 @@ import java.io.PrintWriter;
 public class AddServlet extends HttpServlet {
 
     @Override
+    public void init() throws ServletException {
+        super.init();
+    }
+
+    @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
         String num1 = req.getParameter("num1");
@@ -42,5 +47,10 @@ public class AddServlet extends HttpServlet {
         }
 
         return true;
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
     }
 }
