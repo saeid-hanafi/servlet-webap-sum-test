@@ -3,9 +3,8 @@ package com.yasertebat.servlet;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -27,9 +26,23 @@ public class AddServlet extends HttpServlet {
             double newNum2 = Double.parseDouble(num2);
             double sum = newNum1 + newNum2;
 
-            req.setAttribute("SUM", sum);
+            // Redirect To Another Servlet And Send Value By Cookies
+            Cookie cookie = new Cookie("sum", sum+"");
+            resp.addCookie(cookie);
+            resp.sendRedirect("square");
+
+            // Redirect To Another Servlet And Send Value By Session
+            /** HttpSession session = req.getSession();
+            session.setAttribute("sum", sum);
+            resp.sendRedirect("square"); */
+
+            // Redirect To Another Servlet And Send Value By Get Method
+            /** resp.sendRedirect("square?sum=" + sum); **/
+
+            // Forward Servlet By Request Dispatcher By Equal URL
+            /** req.setAttribute("SUM", sum);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("square");
-            requestDispatcher.forward(req, resp);
+            requestDispatcher.forward(req, resp); **/
         }else{
             writer.print("Enter Valid Numbers, Please.");
         }

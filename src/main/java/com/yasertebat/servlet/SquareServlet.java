@@ -2,9 +2,7 @@ package com.yasertebat.servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +18,26 @@ public class SquareServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
-        double sum = (double) req.getAttribute("SUM");
+
+        // Forward Servlet By Request Dispatcher By Equal URL
+        /* double sum = (double) req.getAttribute("SUM"); */
+
+        // Redirect To Another Servlet And Send Value By Get Method
+        /** double sum = Double.parseDouble(req.getParameter("sum")); */
+
+        // Redirect To Another Servlet And Send Value By Session
+        /** HttpSession session = req.getSession();
+        double sum = (double) session.getAttribute("sum"); */
+
+        // Redirect To Another Servlet And Send Value By Cookies
+        Cookie[] cookies = req.getCookies();
+        double sum = 0;
+        for (Cookie cookie: cookies) {
+            if (cookie.getName().equals("sum")) {
+                sum = Double.parseDouble(cookie.getValue());
+            }
+        }
+
         double square = sum * sum;
         writer.print("Square Servlet Result is: " + square);
     }
