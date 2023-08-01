@@ -14,6 +14,10 @@
   <servlet>
     <servlet-name>add</servlet-name>
     <servlet-class>com.yasertebat.servlet.AddServlet</servlet-class>
+    <init-param>
+      <param-name>additionalNum</param-name>
+      <param-value>100</param-value>
+    </init-param>
   </servlet>
 
   <servlet-mapping>
@@ -24,4 +28,9 @@
     <servlet-name>square</servlet-name>
     <servlet-class>com.yasertebat.servlet.SquareServlet</servlet-class>
   </servlet>
+
+  <context-param>
+    <param-name>additionalNum</param-name>
+    <param-value>10</param-value>
+  </context-param>
 </web-app>

@@ -1,6 +1,7 @@
 package com.yasertebat.servlet;
 
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -25,6 +26,11 @@ public class AddServlet extends HttpServlet {
             double newNum1 = Double.parseDouble(num1);
             double newNum2 = Double.parseDouble(num2);
             double sum = newNum1 + newNum2;
+
+            ServletConfig config = getServletConfig();
+            String addNum = config.getInitParameter("additionalNum");
+
+            sum += Double.parseDouble(addNum);
 
             // Redirect To Another Servlet And Send Value By Cookies
             Cookie cookie = new Cookie("sum", sum+"");

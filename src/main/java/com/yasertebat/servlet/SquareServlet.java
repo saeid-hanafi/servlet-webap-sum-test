@@ -1,5 +1,6 @@
 package com.yasertebat.servlet;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -39,6 +40,12 @@ public class SquareServlet extends HttpServlet {
         }
 
         double square = sum * sum;
+
+        ServletContext context = getServletContext();
+        String addNum = context.getInitParameter("additionalNum");
+
+        square *= Double.parseDouble(addNum);
+
         writer.print("Square Servlet Result is: " + square);
     }
 
